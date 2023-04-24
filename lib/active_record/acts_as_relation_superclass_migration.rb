@@ -2,7 +2,8 @@ module ActiveRecord
   module ActsAsRelationSuperclassMigration
     def self.included(base)
       base.class_eval do
-        alias_method_chain :create_table, :as_relation_superclass
+        alias_method :create_table_without_as_relation_superclass, :create_table
+        alias_method :create_table, :create_table_with_as_relation_superclass
       end
     end
 

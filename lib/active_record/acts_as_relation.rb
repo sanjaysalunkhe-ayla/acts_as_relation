@@ -64,7 +64,8 @@ module ActiveRecord
             singleton.send :define_method, :included do |base|
               base.has_one name.to_sym, scope, has_one_options
               base.validate "#{name}_must_be_valid".to_sym
-              base.alias_method_chain name.to_sym, :autobuild
+              base.alias_method "#{name}_without_autobuild".to_sym, name.to_sym
+              base.alias_method name.to_sym, "#{name}_with_autobuild".to_sym
 
               base.extend ActiveRecord::ActsAsRelation::AccessMethods
               attributes = class_name.constantize.content_columns.map(&:name)
