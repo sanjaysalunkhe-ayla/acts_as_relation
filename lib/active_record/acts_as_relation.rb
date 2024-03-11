@@ -136,7 +136,7 @@ module ActiveRecord
         association_name = options[:as] || acts_as_association_name
 
         code = <<-EndCode
-          belongs_to :#{association_name}, :polymorphic => true
+          belongs_to :#{association_name}, :polymorphic => true, inverse_of: false
 
           def specific
             self.#{association_name}
